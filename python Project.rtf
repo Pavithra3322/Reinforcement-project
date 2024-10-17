@@ -1,0 +1,251 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
+{\*\generator Riched20 10.0.22621}\viewkind4\uc1 
+\pard\ri-306\sa200\sl276\slmult1\b\f0\fs22\lang9 Project Description\par
+
+\pard\sa200\sl276\slmult1 1. Aim of the Project:\par
+
+\pard\sa200\sl360\slmult1\b0 The goal of this project is to develop a Patient Management System that allows healthcare administrators or small clinics to store, manage, and retrieve patient information efficiently. This system will also ensure data persistence using file storage so that patient records remain available even after the program terminates. The key objectives are:\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 To provide a centralized solution to manage patient data.\par
+{\pntext\f1\'B7\tab}To offer a simple interface to add, search, delete, and display patient records.\par
+{\pntext\f1\'B7\tab}To ensure that all patient data is saved to a file for future reference.\par
+{\pntext\f1\'B7\tab}To handle potential errors gracefully, ensuring a smooth user experience.\par
+
+\pard\sa200\sl276\slmult1\b 2. Business Problem or Problem Statement:\par
+
+\pard\sa200\sl360\slmult1\b0 Managing patient information manually using paper records or basic spreadsheets can lead to inefficiencies, especially in scenarios where there are many patients. Errors, missing information, and data corruption can result in poor healthcare services and communication lapses. Additionally, manual data management lacks the necessary automation to maintain and access patient records efficiently.\par
+
+\pard\sa200\sl276\slmult1 Therefore, there is a need for an automated system that:\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Simplifies patient data management.\par
+{\pntext\f1\'B7\tab}Stores patient information securely in a file.\par
+{\pntext\f1\'B7\tab}Supports basic operations like adding, searching, deleting, and displaying patient records.\par
+{\pntext\f1\'B7\tab}Ensures smooth and error-free operation by incorporating exception handling.\par
+
+\pard\sa200\sl276\slmult1\b 3. Project Description:\par
+
+\pard\sa200\sl360\slmult1\b0 This project involves developing a Patient Management System using Python with object-oriented programming (OOP) principles. The system allows healthcare providers to\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b Add Patient Information: \b0 Insert new patient details, including name, ID, contact information, and medical history.\par
+{\pntext\f1\'B7\tab}\b Display All Patients: \b0 View all patients' information stored in the system.\par
+{\pntext\f1\'B7\tab}\b Search for a Patient:\b0  Find a specific patient by their ID.\par
+{\pntext\f1\'B7\tab}\b Delete a Patient:\b0  Remove a patient's record using their ID.\par
+{\pntext\f1\'B7\tab}\b Persistent Data Storage:\b0  Patient data is stored in a file (patients.txt) for easy retrieval.\par
+{\pntext\f1\'B7\tab}\b Error and Exception Handling:\b0  File operations and user inputs are protected by error handling mechanisms to avoid crashes and ensure data integrity.\par
+
+\pard\sa200\sl276\slmult1\b 4. Functionalities:\par
+\ul - Patient Management:\ulnone\b0\par
+
+\pard\sa200\sl360\slmult1 The system allows adding, deleting, searching, and displaying patient information. Patient data includes their name, patient ID, contact details, and medical history.\par
+
+\pard\sa200\sl276\slmult1\ul\b - File-based Data Storage:\par
+
+\pard\sa200\sl360\slmult1\ulnone\b0 The system saves patient information in a text file (patients.txt). This ensures that data persists even after the program is closed.\par
+
+\pard\sa200\sl276\slmult1\ul\b - Error Handling:\par
+
+\pard\sa200\sl360\slmult1\ulnone\b0 The program includes basic error handling to catch file read/write errors and invalid user input. For example, when searching for a patient, if the ID is not found, the program handles it gracefully by notifying the user.\par
+
+\pard\sa200\sl276\slmult1\b 5. Input Versatility with Error Handling and Exception Handling:\par
+\b0 The program handles various inputs:\par
+\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl360\slmult1\b Patient Information: \b0 Users provide details such as name, patient ID, contact, and medical history. This data is either entered manually by the user or retrieved from the file.\par
+{\pntext\f1\'B7\tab}\b File Operations: \b0 The system ensures that patient data is safely stored and retrieved using file handling mechanisms. It uses exception handling to ensure that file-related errors (like missing files or permission issues) don't crash the program.\par
+{\pntext\f1\'B7\tab}\b Exception Handling:\b0  The program captures errors during runtime using try-except blocks. Whether it\rquote s related to file operations or invalid user input, the program prevents the system from crashing by handling these exceptions and informing the user with helpful error messages.\par
+
+\pard\sa200\sl276\slmult1\b 6. Code Implementation:\b0\par
+python\par
+Copy code\par
+import os  # Importing the os module to handle file operations safely.\par
+\par
+# Class to represent a Patient\par
+class Patient:\par
+    def __init__(self, name, patient_id, contact, medical_history=None):\par
+        """\par
+        Initialize a new Patient object.\par
+        Args:\par
+        - name (str): The name of the patient.\par
+        - patient_id (str): A unique ID for the patient.\par
+        - contact (str): Contact information for the patient.\par
+        - medical_history (list, optional): A list of medical history entries.\par
+        """\par
+        self.name = name\par
+        self.patient_id = patient_id\par
+        self.contact = contact\par
+        # Initialize medical history; defaults to an empty list if not provided.\par
+        self.medical_history = medical_history if medical_history else []\par
+\par
+    def display(self):\par
+        """\par
+        Display the patient's information.\par
+        """\par
+        # Print patient's details, including their medical history or 'None' if empty.\par
+        print(f"Name: \{self.name\}, ID: \{self.patient_id\}, Contact: \{self.contact\}, History: \{', '.join(self.medical_history) or 'None'\}")\par
+\par
+# Manager class to handle multiple patients\par
+class PatientManager:\par
+    def __init__(self, filename="patients.txt"):\par
+        """\par
+        Initialize a new PatientManager object with an empty list of patients.\par
+        Args:\par
+        - filename (str): The name of the file to store patient records.\par
+        """\par
+        self.patients = []  # List to store Patient objects.\par
+        self.filename = filename  # File name for saving patient data.\par
+        self.load_patients()  # Load existing patients from the file.\par
+\par
+    def add_patient(self, patient):\par
+        """\par
+        Add a new patient to the list and save to file.\par
+        Args:\par
+        - patient (Patient): The patient object to be added.\par
+        """\par
+        self.patients.append(patient)  # Add the patient to the list.\par
+        self.save_patient(patient)  # Save the new patient to the file.\par
+\par
+    def display_patients(self):\par
+        """\par
+        Display information of all patients in the list.\par
+        """\par
+        if not self.patients:  # Check if the patients list is empty.\par
+            print("No patients found.")  # Inform the user if there are no patients.\par
+        for patient in self.patients:  # Loop through each patient.\par
+            patient.display()  # Display their information.\par
+\par
+    def search_patient(self, patient_id):\par
+        """\par
+        Search for a patient by their ID.\par
+        Args:\par
+        - patient_id (str): The ID of the patient to search for.\par
+        Returns:\par
+        - Patient or None: The matching Patient object, or None if not found.\par
+        """\par
+        for patient in self.patients:  # Loop through each patient in the list.\par
+            if patient.patient_id == patient_id:  # Check if the ID matches.\par
+                return patient  # Return the found patient.\par
+        return None  # Return None if no match is found.\par
+\par
+    def delete_patient(self, patient_id):\par
+        """\par
+        Delete a patient by their ID and update the file.\par
+        Args:\par
+        - patient_id (str): The ID of the patient to delete.\par
+        """\par
+        # Filter out the patient with the matching ID from the list.\par
+        self.patients = [p for p in self.patients if p.patient_id != patient_id]\par
+        self.save_all()  # Save the updated list of patients to the file.\par
+\par
+    def save_patient(self, patient):\par
+        """\par
+        Save a single patient's information to the file.\par
+        Args:\par
+        - patient (Patient): The patient object to be saved.\par
+        """\par
+        try:\par
+            with open(self.filename, "a") as file:  # Open the file in append mode.\par
+                # Write the patient's details to the file, separating history with '|'.\par
+                file.write(f"\{patient.name\},\{patient.patient_id\},\{patient.contact\},\{'|'.join(patient.medical_history)\}\\n")\par
+        except Exception as e:\par
+            print(f"Error saving patient: \{e\}")  # Print an error message if saving fails.\par
+\par
+    def save_all(self):\par
+        """\par
+        Save all patients' information to the file.\par
+        """\par
+        try:\par
+            with open(self.filename, "w") as file:  # Open the file in write mode.\par
+                for patient in self.patients:  # Loop through each patient in the list.\par
+                    # Write each patient's details to the file.\par
+                    file.write(f"\{patient.name\},\{patient.patient_id\},\{patient.contact\},\{'|'.join(patient.medical_history)\}\\n")\par
+        except Exception as e:\par
+            print(f"Error saving all patients: \{e\}")  # Print an error message if saving fails.\par
+\par
+    def load_patients(self):\par
+        """\par
+        Load patients' information from the file.\par
+        """\par
+        if os.path.exists(self.filename):  # Check if the file exists.\par
+            try:\par
+                with open(self.filename, "r") as file:  # Open the file in read mode.\par
+                    for line in file:  # Read each line in the file.\par
+                        # Split the line into components.\par
+                        name, patient_id, contact, medical_history = line.strip().split(',', 3)\par
+                        # Split the medical history into a list if it exists.\par
+                        history = medical_history.split('|') if medical_history else []\par
+                        # Create a Patient object and add it to the patients list.\par
+                        self.patients.append(Patient(name, patient_id, contact, history))\par
+            except Exception as e:\par
+                print(f"Error loading patients: \{e\}")  # Print an error message if loading fails.\par
+\par
+# Main function to run the program\par
+def main():\par
+    pm = PatientManager()  # Create an instance of PatientManager to manage patient records.\par
+    while True:  # Loop to continuously prompt the user for actions.\par
+        try:\par
+            # Display menu options for the user.\par
+            print("\\n1. Add Patient  2. Display Patients  3. Search Patient  4. Delete Patient  5. Exit")\par
+            choice = input("Choose: ")  # Get user choice.\par
+\par
+            # Adding a new patient\par
+            if choice == "1":\par
+                name = input("Name: ")  # Prompt for patient name.\par
+                patient_id = input("ID: ")  # Prompt for patient ID.\par
+                contact = input("Contact: ")  # Prompt for patient contact.\par
+                history = input("Medical History (comma-separated): ").split(',')  # Prompt for medical history.\par
+                # Create a Patient object and add it to the manager.\par
+                pm.add_patient(Patient(name, patient_id, contact, history))\par
+                \par
+            # Displaying all patients\par
+            elif choice == "2":\par
+                pm.display_patients()  # Display all patients' information.\par
+                \par
+            # Searching for a specific patient\par
+            elif choice == "3":\par
+                patient_id = input("Patient ID: ")  # Prompt for patient ID to search.\par
+                patient = pm.search_patient(patient_id)  # Search for the patient.\par
+                if patient:\par
+                    patient.display()  # Display the patient's information if found.\par
+                else:\par
+                    print("Patient not found.")  # Inform the user if no patient was found.\par
+\par
+            # Deleting a patient\par
+            elif choice == "4":\par
+                patient_id = input("Patient ID to delete: ")  # Prompt for ID of patient to delete.\par
+                pm.delete_patient(patient_id)  # Delete the patient from the manager.\par
+\par
+            # Exiting the program\par
+            elif choice == "5":\par
+                break  # Exit the loop and end the program.\par
+\par
+            # Handling invalid choices\par
+            else:\par
+                print("Invalid choice.")  # Inform the user of an invalid input.\par
+                \par
+        except Exception as e:\par
+            print(f"Error: \{e\}")  # Print any error that occurs during user interaction.\par
+\par
+# Entry point of the program\par
+if __name__ == "__main__":\par
+    main()  # Call the main function to start the program.\par
+
+\pard\sa200\sl360\slmult1 In this code snippet, we define a Patient class that represents patients with attributes like name, ID, contact information, and medical history. We also create a PatientManager class to manage a list of patients, allowing us to add, display, search, and delete patient records.\par
+The PatientManager handles saving patient data to a file and loading it when the program starts, ensuring that information is retained. This organization makes the code clear and easy to maintain, allowing for future updates or improvements.\par
+
+\pard\sa200\sl276\slmult1\b 7. Results and Outcomes:\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b0 The program offers an easy-to-use interface for managing patient records.\par
+{\pntext\f1\'B7\tab}Data persistence ensures that patient information is not lost after the program is closed.\par
+{\pntext\f1\'B7\tab}Error handling mechanisms provide users with meaningful feedback in case of errors.\par
+{\pntext\f1\'B7\tab}The system successfully manages adding, displaying, searching, and deleting  patient data.\par
+
+\pard\sa200\sl276\slmult1\b 8. Conclusion:\par
+\b0 This Patient Management System provides a functional solution for managing patient information in small clinics or healthcare practices. By leveraging file storage, OOP principles, and error handling, it ensures efficient and reliable data management. Future enhancements can include adding more functionalities, such as managing appointments, generating reports, and integrating with databases for larger-scale solutions.\par
+\par
+\par
+\par
+\par
+\par
+\par
+}
+ 
